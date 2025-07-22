@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once 'utils/auth.util.php';
 
 logout();
 
-header("Location: login.php");
+header("Location: index.php");
 exit;
