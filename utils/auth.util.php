@@ -40,7 +40,7 @@ function getAuthenticatedUser(): ?array {
 // Require login for protected pages
 function requireLogin(): void {
     if (!isAuthenticated()) {
-        header('Location: login.php');
+        header('Location: uin.php');
         exit;
     }
 }
@@ -53,41 +53,17 @@ function logout(): void {
 }
 
 function authenticate(string $username, string $password): bool {
-    // Ensure session is started
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    
-    // Check file-based users first
-    $usersFile = __DIR__ . '/../data/users.json';
-    if (file_exists($usersFile)) {
-        $users = json_decode(file_get_contents($usersFile), true) ?: [];
-        
-        foreach ($users as $user) {
-            if ($user['username'] === $username && password_verify($password, $user['password'])) {
-                $_SESSION['user'] = [
-                    'id' => count($users), // Simple ID based on position
-                    'username' => $user['username'],
-                    'first_name' => $user['first_name'],
-                    'last_name' => $user['last_name'],
-                    'email' => $user['email'],
-                    'role' => $user['role']
-                ];
-                error_log("File-based authentication successful for: " . $username);
-                return true;
-            }
-        }
-    }
-    
-    // Fallback to hardcoded credentials since database is not set up
+
+    error_log("🔐 Trying to authenticate user: $username");
+
     $validCredentials = [
         'admin' => 'password',
         'john.smith' => 'p@ssW0rd1234'
     ];
-    
-    error_log("Authenticate function called with username: '$username', password: '$password'");
-    error_log("Valid credentials: " . print_r($validCredentials, true));
-    
+
     if (isset($validCredentials[$username]) && $validCredentials[$username] === $password) {
         $_SESSION['user'] = [
             'id' => 1,
@@ -97,11 +73,13 @@ function authenticate(string $username, string $password): bool {
             'email' => $username === 'admin' ? 'admin@mechanicus.com' : 'john.smith@mechanicus.com',
             'role' => $username === 'admin' ? 'Tech-Dominus' : 'Tech-Priest'
         ];
+        error_log("✅ AUTH SUCCESS for $username");
         return true;
     }
-    
+
+    error_log("❌ AUTH FAILED for $username");
     return false;
-    
+
     /*
     // Original database code (commented out since no database connection exists)
     global $pdo;
@@ -118,4 +96,3 @@ function authenticate(string $username, string $password): bool {
     return false;
     */
 }
-

@@ -1,5 +1,5 @@
 <?php
-require_once 'utils/auth.util.php'; // Needed for isAuthenticated()
+require_once __DIR__ . '/../utils/auth.util.php'; // Needed for isAuthenticated()
 
 function renderLayout(string $pageTitle, string $content): string {
     // Dynamically build the nav links

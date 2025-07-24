@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -53,6 +53,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 }
 
+
 ob_start();
 ?>
 <!DOCTYPE html>
@@ -102,7 +103,7 @@ ob_start();
         <?php endif; ?>
         
         <?php if ($showLoginForm): ?>
-        <form method="post" class="login-form">
+        <form method="post" action="index.php" class="login-form">
           <div class="form-group">
             <label for="username"><i class="fas fa-user"></i> Username</label>
             <input type="text" id="username" name="username" required placeholder="Enter your username">
