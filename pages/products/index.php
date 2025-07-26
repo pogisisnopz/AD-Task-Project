@@ -6,21 +6,9 @@ require_once __DIR__ . '/../../layouts/main.layout.php';
 
 // Check if the user is logged in
 $loggedIn = isAuthenticated();
-// AUTHENTICATION TEMPORARILY DISABLED FOR DEVELOPMENT
-// if (!$loggedIn) {
-//     header("Location: ../../login.php");
-//     exit;
-// }
+$currentPath = $_SERVER['REQUEST_URI'] ?? '';
+$user = $loggedIn ? getAuthenticatedUser() : null;
 
-// Fake user for development
-$user = [
-    'id' => 1,
-    'username' => 'admin',
-    'first_name' => 'Admin',
-    'last_name' => 'User',
-    'email' => 'admin@mechanicus.com',
-    'role' => 'Tech-Dominus'
-];
 $products = getProducts();
 
 ob_start();
@@ -44,18 +32,18 @@ ob_start();
   <header class="header">
     <div class="top-bar">
       <div class="title">MECHANICUS HEALTH EMPORIUM</div>
-      <a href="../../pages/cart/" class="cart" id="cart-link">Sacred Cart: <span id="cart-total"><?= formatPrice(getCartTotal()) ?></span> (<span id="cart-count"><?= getCartItemCount() ?></span>)</a>
+      <a href="../../pages/cart/index.php" class="cart" id="cart-link">Sacred Cart: <span id="cart-total"><?= formatPrice(getCartTotal()) ?></span> (<span id="cart-count"><?= getCartItemCount() ?></span>)</a>
     </div>
     <nav class="nav-bar">
       <ul>
-        <li><a href="../../pages/home/">Sacred Home</a></li>
-        <li><a href="../../pages/products/" class="active">Blessed Products</a></li>
-        <li><a href="../../pages/about/">The Sacred Creed</a></li>
-        <li><a href="../../pages/delivery/">Imperial Delivery</a></li>
-        <li><a href="../../pages/privacy/">Privacy Protocols</a></li>
-        <li><a href="../../pages/terms/">Terms of Service</a></li>
-        <li><a href="../../pages/faq/">Sacred Knowledge</a></li>
-        <li><a href="../../pages/cart/">Sacred Cart</a></li>
+        <li><a href="../../pages/home/index.php">Sacred Home</a></li>
+        <li><a href="../../pages/products/index.php" class="active">Blessed Products</a></li>
+        <li><a href="../../pages/about/index.php">The Sacred Creed</a></li>
+        <li><a href="../../pages/delivery/index.php">Imperial Delivery</a></li>
+        <li><a href="../../pages/privacy/index.php">Privacy Protocols</a></li>
+        <li><a href="../../pages/terms/index.php">Terms of Service</a></li>
+        <li><a href="../../pages/faq/index.php">Sacred Knowledge</a></li>
+        <li><a href="../../pages/cart/index.php">Sacred Cart</a></li>
       </ul>
     </nav>
   </header>

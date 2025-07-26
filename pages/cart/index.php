@@ -11,16 +11,6 @@ $loggedIn = isAuthenticated();
 //     header("Location: ../../login.php");
 //     exit;
 // }
-
-// Fake user for development
-$user = [
-    'id' => 1,
-    'username' => 'admin',
-    'first_name' => 'Admin',
-    'last_name' => 'User',
-    'email' => 'admin@mechanicus.com',
-    'role' => 'Tech-Dominus'
-];
 $cartItems = getCartItems();
 $cartTotal = getCartTotal();
 $cartCount = getCartItemCount();
@@ -46,18 +36,18 @@ ob_start();
   <header class="header">
     <div class="top-bar">
       <div class="title">MECHANICUS HEALTH EMPORIUM</div>
-      <a href="../../pages/cart/" class="cart" id="cart-link">Sacred Cart: ₱0.00</a>
+      <a href="../../pages/cart/index.php" class="cart" id="cart-link">Sacred Cart: ₱0.00</a>
     </div>
     <nav class="nav-bar">
       <ul>
-        <li><a href="../../pages/home/">Sacred Home</a></li>
-        <li><a href="../../pages/products/">Blessed Products</a></li>
-        <li><a href="../../pages/about/">The Sacred Creed</a></li>
-        <li><a href="../../pages/delivery/">Imperial Delivery</a></li>
-        <li><a href="../../pages/privacy/">Privacy Protocols</a></li>
-        <li><a href="../../pages/terms/">Terms of Service</a></li>
-        <li><a href="../../pages/faq/">Sacred Knowledge</a></li>
-        <li><a href="../../pages/cart/" class="active">Sacred Cart</a></li>
+        <li><a href="../../pages/home/index.php">Sacred Home</a></li>
+        <li><a href="../../pages/products/index.php">Blessed Products</a></li>
+        <li><a href="../../pages/about/index.php">The Sacred Creed</a></li>
+        <li><a href="../../pages/delivery/index.php">Imperial Delivery</a></li>
+        <li><a href="../../pages/privacy/index.php">Privacy Protocols</a></li>
+        <li><a href="../../pages/terms/index.php">Terms of Service</a></li>
+        <li><a href="../../pages/faq/index.php">Sacred Knowledge</a></li>
+        <li><a href="../../pages/cart/index.php" class="active">Sacred Cart</a></li>
       </ul>
     </nav>
   </header>
@@ -81,7 +71,7 @@ ob_start();
             <i class="fas fa-shopping-cart"></i>
             <p>Your cart is currently empty</p>
             <p>Browse our blessed products and add them to your cart</p>
-            <a href="../../pages/products/" class="btn btn-primary">Browse Products</a>
+            <a href="../../pages/products/index.php" class="btn btn-primary">Browse Products</a>
           </div>
           <div class="cart-items-list" id="cart-items-list" style="display: none;">
             <!-- Cart items will be inserted here by JavaScript -->

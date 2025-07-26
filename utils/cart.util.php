@@ -1,10 +1,7 @@
 <?php
 // Cart utility functions
 
-// Ensure session is started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+
 
 // Initialize cart if it doesn't exist
 if (!isset($_SESSION['cart'])) {

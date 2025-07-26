@@ -2,9 +2,9 @@
 // This is a dummy file to avoid connection errors during development
 // Leave $pdo unset if DB is not required<?php
 $host = 'host.docker.internal';
-$dbname = 'project_db_pg';     // ← Replace this
-$user = 'user';         // ← Replace this
-$pass = 'password';         // ← Replace this
+$dbname = 'project_db_pg';  
+$user = 'user';      
+$pass = 'password';   
 $dsn = "pgsql:host=host.docker.internal;port=5112;dbname=project_db_pg";
 
 try {

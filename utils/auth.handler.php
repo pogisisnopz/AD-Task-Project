@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-session_start();
+
 
 // Load environment
 require_once __DIR__ . '/../bootstrap.php';
@@ -29,6 +29,6 @@ if ($user && password_verify($password, $user['password'])) {
     exit;
 } else {
     // Auth failed: redirect back with error
-    header('Location: /login.php?error=1');
+    header('Location: /index.php?error=1');
     exit;
 }

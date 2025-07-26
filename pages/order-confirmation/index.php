@@ -28,18 +28,18 @@ ob_start();
   <header class="header">
     <div class="top-bar">
       <div class="title">MECHANICUS HEALTH EMPORIUM</div>
-      <a href="../../pages/cart/" class="cart" id="cart-link">Sacred Cart: ₱0.00</a>
+      <a href="../../pages/cart/index.php" class="cart" id="cart-link">Sacred Cart: ₱0.00</a>
     </div>
     <nav class="nav-bar">
       <ul>
-        <li><a href="../../pages/home/">Sacred Home</a></li>
-        <li><a href="../../pages/products/">Blessed Products</a></li>
-        <li><a href="../../pages/about/">The Sacred Creed</a></li>
-        <li><a href="../../pages/delivery/">Imperial Delivery</a></li>
-        <li><a href="../../pages/privacy/">Privacy Protocols</a></li>
-        <li><a href="../../pages/terms/">Terms of Service</a></li>
-        <li><a href="../../pages/faq/">Sacred Knowledge</a></li>
-        <li><a href="../../pages/cart/">Sacred Cart</a></li>
+        <li><a href="../../pages/home/index.php">Sacred Home</a></li>
+        <li><a href="../../pages/products/index.php">Blessed Products</a></li>
+        <li><a href="../../pages/about/index.php">The Sacred Creed</a></li>
+        <li><a href="../../pages/delivery/index.php">Imperial Delivery</a></li>
+        <li><a href="../../pages/privacy/index.php">Privacy Protocols</a></li>
+        <li><a href="../../pages/terms/index.php">Terms of Service</a></li>
+        <li><a href="../../pages/faq/index.php">Sacred Knowledge</a></li>
+        <li><a href="../../pages/cart/index.php">Sacred Cart</a></li>
       </ul>
     </nav>
   </header>
@@ -84,8 +84,8 @@ ob_start();
         </div>
         
         <div class="order-actions">
-          <a href="../../pages/products/" class="btn btn-secondary">Continue Sacred Shopping</a>
-                    <a href="../../pages/home/" class="btn btn-primary">Return to Sacred Home</a>
+          <a href="../../pages/products/index.php" class="btn btn-secondary">Continue Sacred Shopping</a>
+                    <a href="../../pages/home/index.php" class="btn btn-primary">Return to Sacred Home</a>
         </div>
       </div>
     </section>

@@ -1,40 +1,5 @@
 <?php
-session_start();
 
-// Simple test credentials (you can change these)
-$valid_users = [
-    'admin' => 'password',
-    'john.smith' => 'p@ssW0rd1234'
-];
-
-$error = '';
-
-// Handle login
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-    
-    if (isset($valid_users[$username]) && $valid_users[$username] === $password) {
-        $_SESSION['authenticated'] = true;
-        $_SESSION['username'] = $username;
-        $_SESSION['user'] = [
-            'username' => $username,
-            'first_name' => $username === 'admin' ? 'Admin' : 'John',
-            'last_name' => $username === 'admin' ? 'User' : 'Smith',
-            'role' => $username === 'admin' ? 'admin' : 'user'
-        ];
-        header("Location: index.php");
-        exit;
-    } else {
-        $error = "❌ Invalid credentials.";
-    }
-}
-
-// Check if already logged in
-if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-    header("Location: index.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

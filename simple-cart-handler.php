@@ -3,11 +3,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 0); // Don't show errors in JSON response
 
-// Start session
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Initialize cart
 if (!isset($_SESSION['simple_cart'])) {
     $_SESSION['simple_cart'] = [];

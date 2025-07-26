@@ -29,13 +29,14 @@ $pdo = new PDO($dsn, $username, $password, [
 echo "Seeding users…\n";
 
 $stmt = $pdo->prepare("
-    INSERT INTO users (username, role, first_name, last_name, password)
-    VALUES (:username, :role, :fn, :ln, :pw)
+    INSERT INTO users (username, email, role, first_name, last_name, password)
+    VALUES (:username, :email, :role, :fn, :ln, :pw)
 ");
 
 foreach ($users as $u) {
     $stmt->execute([
         ':username' => $u['username'],
+        ':email' => $u['email'],
         ':role' => $u['role'],
         ':fn' => $u['first_name'],
         ':ln' => $u['last_name'],

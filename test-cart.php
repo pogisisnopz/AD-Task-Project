@@ -1,8 +1,4 @@
 <?php
-// Test cart functionality
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 require_once 'utils/cart.util.php';
 

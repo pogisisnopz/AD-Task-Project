@@ -1,60 +1,61 @@
 <?php
-
+error_log("🌟 " . basename($_SERVER['SCRIPT_NAME']) . " starting - Session ID: " . session_id());
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Bootstrap already starts the session, so don't start it again
 require_once 'bootstrap.php';
 require_once 'utils/auth.util.php';
-require_once 'layouts/main.layout.php';
 
-// Check if user is already logged in
-$loggedIn = isAuthenticated();
-if ($loggedIn) {
-    // Clear any output buffer and redirect to home
-    if (ob_get_level()) {
-        ob_end_clean();
+// Get the current script name to make sure we're on the login page
+$currentScript = basename($_SERVER['SCRIPT_NAME']);
+$requestUri = $_SERVER['REQUEST_URI'];
+
+// Only check for redirect if we're specifically on the root index.php
+if ($currentScript === 'index.php' && ($requestUri === '/' || $requestUri === '/index.php')) {
+    $loggedIn = isAuthenticated();
+    if ($loggedIn) {
+        header("Location: pages/home/index.php", true, 302);
+        exit;
     }
-    header("Location: pages/home/");
-    exit;
 }
+
+// Start output buffering after redirect check
+ob_start();
 
 $error = '';
 $success = '';
 $showLoginForm = true;
 
-// Check if REQUEST_METHOD is set (this avoids CLI warnings)
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check for bypass button
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['bypass'])) {
         $_SESSION['simple_auth'] = true;
         $_SESSION['simple_user'] = 'admin';
-        $success = "🚀 Bypass activated! You are now logged in as admin.";
-        $showLoginForm = false;
+
+        // Set full user data
+        $_SESSION['user'] = getAuthenticatedUser(); 
+
+        // Redirect immediately after successful bypass
+        header("Location: pages/home/index.php", true, 302);
+        exit;
     } else {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        // Debug output
-        error_log("Login attempt - Username: " . $username . ", Password length: " . strlen($password));
-        
         if (authenticate($username, $password)) {
-            error_log("Authentication successful for: " . $username);
-            // Instead of redirect, show success message with manual navigation
-            $success = "✅ Login successful! Welcome " . htmlspecialchars($username) . "!";
-            $showLoginForm = false;
-            
-            // Also set a cookie or session flag for simple auth check
-            $_SESSION['simple_auth'] = true;
-            $_SESSION['simple_user'] = $username;
+            // Redirect immediately after successful login
+            header("Location: pages/home/index.php", true, 302);
+            exit;
         } else {
-            error_log("Authentication failed for: " . $username);
-            $error = "❌ Invalid credentials. Debug: Username='$username', Password length=" . strlen($password);
+            $error = "❌ Invalid credentials.";
         }
     }
 }
 
-
-ob_start();
+// Clear any previous output that might have been generated
+if (ob_get_level()) {
+    ob_clean();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,19 +91,6 @@ ob_start();
         </div>
         <?php endif; ?>
         
-        <?php if ($success): ?>
-        <div class="success-message">
-          <i class="fas fa-check-circle"></i>
-          <?= htmlspecialchars($success) ?>
-        </div>
-        <div class="navigation-links">
-          <p><a href="pages/home/" class="btn">🏠 Go to Homepage</a></p>
-          <p><a href="pages/products/" class="btn">🛍️ View Products</a></p>
-          <p><a href="pages/cart/" class="btn">🛒 View Cart</a></p>
-        </div>
-        <?php endif; ?>
-        
-        <?php if ($showLoginForm): ?>
         <form method="post" action="index.php" class="login-form">
           <div class="form-group">
             <label for="username"><i class="fas fa-user"></i> Username</label>
@@ -137,7 +125,6 @@ ob_start();
         <p class="signup-link">
           Don't have blessed access? <a href="signup.php">Request Sacred Account</a>
         </p>
-        <?php endif; ?>
       </div>
     </section>
   </main>
@@ -234,34 +221,14 @@ ob_start();
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
-    .error-message, .success-message {
+    .error-message {
       padding: 15px;
       border-radius: 10px;
       margin-bottom: 20px;
       font-weight: bold;
-    }
-
-    .error-message {
       background: rgba(220, 53, 69, 0.1);
       border: 2px solid #dc3545;
       color: #dc3545;
-    }
-
-    .success-message {
-      background: rgba(40, 167, 69, 0.1);
-      border: 2px solid #28a745;
-      color: #28a745;
-    }
-
-    .navigation-links {
-      margin-top: 20px;
-    }
-
-    .navigation-links .btn {
-      display: block;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, var(--primary-gold), #f0d000);
-      color: var(--dark-bronze);
     }
 
     .login-info {
@@ -308,6 +275,6 @@ ob_start();
 </html>
 
 <?php
-$content = ob_get_clean();
-echo $content;
+// Clean up output buffer and display content
+ob_end_flush();
 ?>

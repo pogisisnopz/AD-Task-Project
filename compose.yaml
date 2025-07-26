@@ -42,9 +42,11 @@ services:
     ports:
       - "5112:5432"
     volumes:
-      - ad-task-project-postgresql:/data/db/postgresql
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
+  pgdata:
+    driver: local
   ad-task-project-mongodb:
     driver: local
   ad-task-project-postgresql:

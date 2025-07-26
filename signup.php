@@ -1,7 +1,9 @@
 <?php
-session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+// Start output buffering immediately
+ob_start();
 
 require_once 'bootstrap.php';
 require_once 'utils/auth.util.php';
@@ -21,8 +23,9 @@ if ($loggedIn) {
     exit;
 }
 
-// Handle form submission
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get form data
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $first_name = trim($_POST['first_name'] ?? '');
@@ -32,71 +35,74 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     
     // Validation
     if (empty($username) || empty($email) || empty($first_name) || empty($last_name) || empty($password)) {
-        $error = "❌ All fields are required for sacred registration";
-    } elseif ($password !== $confirm_password) {
-        $error = "❌ Passwords do not match";
+        $error = "❌ All fields are required";
+    } elseif (strlen($username) < 3) {
+        $error = "❌ Username must be at least 3 characters long";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "❌ Please enter a valid email address";
     } elseif (strlen($password) < 6) {
         $error = "❌ Password must be at least 6 characters long";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "❌ Invalid email format";
+    } elseif ($password !== $confirm_password) {
+        $error = "❌ Passwords do not match";
     } else {
-        // Create user data
-        $userData = [
-            'username' => $username,
-            'email' => $email,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
-            'role' => 'Initiate',
-            'created_at' => date('Y-m-d H:i:s')
-        ];
-        
-        // For development: save to a simple file
-        $usersFile = 'data/users.json';
-        $users = [];
-        
-        // Create data directory if it doesn't exist
-        if (!is_dir('data')) {
-            mkdir('data', 0755, true);
-        }
-        
-        // Load existing users
-        if (file_exists($usersFile)) {
-            $users = json_decode(file_get_contents($usersFile), true) ?: [];
-        }
-        
-        // Check if username or email already exists
-        foreach ($users as $user) {
-            if ($user['username'] === $username) {
-                $error = "❌ Username already exists";
-                break;
-            }
-            if ($user['email'] === $email) {
-                $error = "❌ Email already registered";
-                break;
-            }
-        }
-        
-        if (empty($error)) {
-            // Add new user
-            $users[] = $userData;
+        try {
+            // Use the global $pdo from bootstrap.php
+            global $pdo;
             
-            // Save users
-            if (file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT))) {
-                $success = "✅ Sacred account created successfully for " . htmlspecialchars($username) . "! You can now login.";
-                $showSignupForm = false;
-                
-                // Log the registration for development
-                error_log("New account created - Username: $username, Email: $email, Name: $first_name $last_name");
+            // Check if username already exists
+            $checkUsernameStmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+            $checkUsernameStmt->execute([':username' => $username]);
+            
+            if ($checkUsernameStmt->fetchColumn() > 0) {
+                $error = "❌ Username already exists";
             } else {
-                $error = "❌ Failed to create account. Please try again.";
+                // Check if email already exists
+                $checkEmailStmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+                $checkEmailStmt->execute([':email' => $email]);
+                
+                if ($checkEmailStmt->fetchColumn() > 0) {
+                    $error = "❌ Email already registered";
+                } else {
+                    // Insert new user into database
+                    $insertStmt = $pdo->prepare("
+                        INSERT INTO users (username, email, first_name, last_name, password, role) 
+                        VALUES (:username, :email, :first_name, :last_name, :password, :role)
+                    ");
+                    
+                    $result = $insertStmt->execute([
+                        ':username' => $username,
+                        ':email' => $email,
+                        ':first_name' => $first_name,
+                        ':last_name' => $last_name,
+                        ':password' => password_hash($password, PASSWORD_DEFAULT), // Properly hash the password
+                        ':role' => 'user'
+                    ]);
+                    
+                    if ($result) {
+                        $success = "✅ Sacred account created successfully for " . htmlspecialchars($username) . "! You can now login.";
+                        $showSignupForm = false;
+                        
+                        // Log the registration for development
+                        error_log("New account created - Username: $username, Email: $email, Name: $first_name $last_name");
+                    } else {
+                        $error = "❌ Failed to create account. Please try again.";
+                    }
+                }
             }
+            
+        } catch (PDOException $e) {
+            error_log("Registration database error: " . $e->getMessage());
+            $error = "❌ Database error occurred. Please try again later.";
         }
     }
 }
 
-ob_start();
+// Clear any previous output
+if (ob_get_level()) {
+    ob_clean();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

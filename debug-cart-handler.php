@@ -6,10 +6,7 @@ ini_set('display_errors', 1);
 echo "<h1>Cart Handler Debug</h1>";
 
 try {
-    echo "<p>1. Starting session...</p>";
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+
     echo "<p>✅ Session started</p>";
 
     echo "<p>2. Loading bootstrap...</p>";

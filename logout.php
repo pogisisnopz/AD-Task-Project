@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+// Start output buffering to prevent any output before headers
+ob_start();
 
 // Destroy all session data
 session_unset();    // Unset all session variables
@@ -14,6 +16,9 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
+// Clean output buffer before redirect
+ob_end_clean();
+
 // Redirect to login page (or homepage)
-header("Location: login.php");
+header("Location: index.php");
 exit;

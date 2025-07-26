@@ -2,25 +2,22 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Start output buffering immediately to prevent any content from being displayed
+ob_start();
+
 require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/../../utils/auth.util.php';
 require_once __DIR__ . '/../../layouts/main.layout.php';
 
 // Check if the user is logged in
 $loggedIn = isAuthenticated();
+$currentPath = $_SERVER['REQUEST_URI'] ?? '';
 $user = $loggedIn ? getAuthenticatedUser() : null;
 
-// If not logged in, redirect to login
-if (!$loggedIn) {
-    // Clear any output buffer and redirect
-    if (ob_get_level()) {
-        ob_end_clean();
-    }
-    header("Location: ../../index.php");
-    exit;
+// Clear any previous output that might have been generated
+if (ob_get_level()) {
+    ob_clean();
 }
-
-ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -45,18 +42,18 @@ ob_start();
   <header class="header">
     <div class="top-bar">
       <div class="title">MECHANICUS HEALTH EMPORIUM</div>
-      <a href="../../pages/cart/" class="cart" id="cart-link">Sacred Cart: ₱0.00</a>
+      <a href="../../pages/cart/index.php" class="cart" id="cart-link">Sacred Cart: ₱0.00</a>
     </div>
     <nav class="nav-bar">
       <ul>
-        <li><a href="../../pages/home/" class="active">Sacred Home</a></li>
-        <li><a href="../../pages/products/">Blessed Products</a></li>
-        <li><a href="../../pages/about/">The Sacred Creed</a></li>
-        <li><a href="../../pages/delivery/">Imperial Delivery</a></li>
-        <li><a href="../../pages/privacy/">Privacy Protocols</a></li>
-        <li><a href="../../pages/terms/">Terms of Service</a></li>
-        <li><a href="../../pages/faq/">Sacred Knowledge</a></li>
-        <li><a href="../../pages/cart/">Sacred Cart</a></li>
+        <li><a href="../../pages/home/index.php" class="active">Sacred Home</a></li>
+        <li><a href="../../pages/products/index.php">Blessed Products</a></li>
+        <li><a href="../../pages/about/index.php">The Sacred Creed</a></li>
+        <li><a href="../../pages/delivery/index.php">Imperial Delivery</a></li>
+        <li><a href="../../pages/privacy/index.php">Privacy Protocols</a></li>
+        <li><a href="../../pages/terms/index.php">Terms of Service</a></li>
+        <li><a href="../../pages/faq/index.php">Sacred Knowledge</a></li>
+        <li><a href="../../pages/cart/index.php">Sacred Cart</a></li>
       </ul>
     </nav>
   </header>
@@ -78,8 +75,8 @@ ob_start();
         <h1>BLESSED HEALING</h1>
         <p>For the Emperor's Glory!</p>
         <div class="action-buttons">
-          <a href="../../pages/products/" class="btn btn-primary">Browse Sacred Products</a>
-          <a href="../../pages/about/" class="btn btn-secondary">Learn Our Creed</a>
+          <a href="../../pages/products/index.php" class="btn btn-primary">Browse Sacred Products</a>
+          <a href="../../pages/about/index.php" class="btn btn-secondary">Learn Our Creed</a>
         </div>
       </div>
       <div class="banner-right white-box steam-effect"></div>
@@ -101,6 +98,6 @@ ob_start();
 </html>
 
 <?php
-$content = ob_get_clean();
-echo $content;
+// Clean up output buffer and display content
+ob_end_flush();
 ?>

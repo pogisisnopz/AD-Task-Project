@@ -7,7 +7,7 @@ function renderLayout(string $pageTitle, string $content): string {
     if (isAuthenticated()) {
         $navLinks .= " <a href='logout.php'>Logout</a>";
     } else {
-        $navLinks .= " <a href='login.php'>Login</a>";
+        $navLinks .= " <a href='index.php'>Login</a>";
     }
 
     // Return the full HTML
