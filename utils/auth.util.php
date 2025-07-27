@@ -92,7 +92,7 @@ function authenticate(string $username, string $password): bool {
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if ($user && $user['password'] === $password) {
+      if ($user && password_verify($password, $user['password'])) { 
             // Store user data in session
             $_SESSION['user'] = [
                 'id' => $user['id'] ?? 1,
