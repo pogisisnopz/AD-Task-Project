@@ -1,6 +1,6 @@
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE SET NULL,
+    user_id UUID REFERENCES users(id) ON DELETE SET NULL,
     full_name TEXT NOT NULL,
     email TEXT NOT NULL,
     address TEXT NOT NULL,
