@@ -27,39 +27,11 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: 
-        /* Steam health background image */
-        url('../img/steamhealthbg.png') no-repeat center center fixed,
-        /* Fallback gradient that matches your image colors */
-        linear-gradient(135deg, var(--bg-dark-green) 0%, var(--bg-teal) 25%, var(--bg-gray) 50%, var(--bg-red) 75%, var(--bg-light-blue) 100%);
+    background: url('../img/Background.png') no-repeat center center fixed;
     background-size: cover;
-    background-attachment: fixed;
     color: var(--parchment);
     min-height: 100vh;
     position: relative;
-}
-
-/* Medical cross overlay effect */
-body::after {
-    content: '';
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    background: 
-        /* Medical cross shape */
-        linear-gradient(to right, transparent 45%, rgba(139, 0, 0, 0.3) 45%, rgba(139, 0, 0, 0.3) 55%, transparent 55%),
-        linear-gradient(to bottom, transparent 45%, rgba(139, 0, 0, 0.3) 45%, rgba(139, 0, 0, 0.3) 55%, transparent 55%);
-    border: 3px solid rgba(139, 0, 0, 0.4);
-    border-radius: 15px;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.6;
-}
-    font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .nav-links {
@@ -167,70 +139,6 @@ body::after {
     transform: translateY(-2px);
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background: 
-        /* Steam health background image */
-        url('./assets/img/steamhealthbg.png') no-repeat center center fixed,
-        /* Fallback gradient that matches your image colors */
-        linear-gradient(135deg, var(--bg-dark-green) 0%, var(--bg-teal) 25%, var(--bg-gray) 50%, var(--bg-red) 75%, var(--bg-light-blue) 100%);
-    background-size: cover;
-    background-attachment: fixed;
-    color: var(--parchment);
-    min-height: 100vh;
-    position: relative;
-}
-
-/* Medical cross overlay effect */
-body::after {
-    content: '';
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    background: 
-        /* Medical cross shape */
-        linear-gradient(to right, transparent 45%, rgba(139, 0, 0, 0.3) 45%, rgba(139, 0, 0, 0.3) 55%, transparent 55%),
-        linear-gradient(to bottom, transparent 45%, rgba(139, 0, 0, 0.3) 45%, rgba(139, 0, 0, 0.3) 55%, transparent 55%);
-    border: 3px solid rgba(139, 0, 0, 0.4);
-    border-radius: 15px;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.6;
-}
-
-/* Add overlay for better text readability */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        /* Semi-transparent overlay for better text readability */
-        rgba(0, 0, 0, 0.3),
-        /* Additional brush stroke effects */
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 20px,
-            rgba(139, 68, 68, 0.05) 20px,
-            rgba(139, 68, 68, 0.05) 25px
-        ),
-        repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 30px,
-            rgba(74, 124, 122, 0.05) 30px,
-            rgba(74, 124, 122, 0.05) 35px
-        );
-    pointer-events: none;
-    z-index: -1;
-}
-
 /* Header Styling */
 .header {
     background: linear-gradient(135deg, var(--bg-dark-green) 0%, var(--bg-teal) 50%, var(--bg-red) 100%);
@@ -263,17 +171,7 @@ body::before {
 .title::after {
     content: '\2699';
     font-size: 0.8em;
-    animation: spin 20s linear infinite;
     color: var(--bg-red);
-}
-
-.title::after {
-    animation-direction: reverse;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 .cart {
@@ -367,6 +265,22 @@ body::before {
     min-height: calc(100vh - 200px);
 }
 
+/* Welcome Section */
+.welcome-section {
+    margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.welcome-section .white-box {
+    background: 
+        linear-gradient(135deg, rgba(245, 245, 220, 0.9) 0%, rgba(248, 248, 255, 0.9) 100%),
+        url('../img/Background.png') center center;
+    background-size: cover;
+    min-height: 150px;
+}
+
 /* Banner Section */
 .banner {
     display: grid;
@@ -379,7 +293,10 @@ body::before {
 }
 
 .white-box {
-    background: linear-gradient(135deg, rgba(245, 245, 220, 0.98) 0%, rgba(248, 248, 255, 0.98) 100%);
+    background: 
+        linear-gradient(135deg, rgba(245, 245, 220, 0.85) 0%, rgba(248, 248, 255, 0.85) 100%),
+        url('../img/Background.png') center center;
+    background-size: cover;
     border: 3px solid var(--primary-gold);
     border-radius: 15px;
     min-height: 250px;
@@ -436,7 +353,6 @@ body::before {
     font-size: 2em;
     color: var(--bg-red);
     opacity: 0.4;
-    animation: spin 30s linear infinite;
 }
 
 .banner-center h1 {
@@ -527,17 +443,17 @@ body::before {
 }
 
 .promo-left {
-    background: linear-gradient(135deg, 
-        rgba(245, 245, 220, 0.95) 0%, 
-        rgba(74, 124, 122, 0.3) 50%,
-        rgba(245, 245, 220, 0.95) 100%);
+    background: 
+        linear-gradient(135deg, rgba(245, 245, 220, 0.85) 0%, rgba(74, 124, 122, 0.3) 50%, rgba(245, 245, 220, 0.85) 100%),
+        url('../img/Background.png') center center;
+    background-size: cover;
 }
 
 .promo-right {
-    background: linear-gradient(135deg, 
-        rgba(245, 245, 220, 0.95) 0%, 
-        rgba(139, 68, 68, 0.3) 50%,
-        rgba(245, 245, 220, 0.95) 100%);
+    background: 
+        linear-gradient(135deg, rgba(245, 245, 220, 0.85) 0%, rgba(139, 68, 68, 0.3) 50%, rgba(245, 245, 220, 0.85) 100%),
+        url('../img/Background.png') center center;
+    background-size: cover;
 }
 
 .promo-left::after {
@@ -588,11 +504,10 @@ body::before {
     font-weight: bold;
     color: var(--bg-dark-green);
     position: relative;
-    background: linear-gradient(135deg, 
-        rgba(245, 245, 220, 0.95) 0%, 
-        rgba(107, 107, 107, 0.2) 30%,
-        rgba(122, 156, 181, 0.2) 70%,
-        rgba(245, 245, 220, 0.95) 100%);
+    background: 
+        linear-gradient(135deg, rgba(245, 245, 220, 0.85) 0%, rgba(107, 107, 107, 0.2) 30%, rgba(122, 156, 181, 0.2) 70%, rgba(245, 245, 220, 0.85) 100%),
+        url('../img/Background.png') center center;
+    background-size: cover;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
 
@@ -604,7 +519,6 @@ body::before {
     font-size: 1.5em;
     color: var(--bg-red);
     opacity: 0.5;
-    animation: spin 25s linear infinite;
 }
 
 /* Responsive Design */
@@ -660,7 +574,7 @@ body::before {
     }
 }
 
-/* Steam Effects - Improved and less wonky */
+/* Steam Effects - Visual elements without animation */
 .steam-effect {
     position: relative;
     overflow: hidden;
@@ -670,34 +584,16 @@ body::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, 
         transparent 0%, 
-        rgba(74, 124, 122, 0.15) 40%,
-        rgba(139, 68, 68, 0.1) 50%,
-        rgba(122, 156, 181, 0.15) 60%,
+        rgba(74, 124, 122, 0.08) 40%,
+        rgba(139, 68, 68, 0.05) 50%,
+        rgba(122, 156, 181, 0.08) 60%,
         transparent 100%);
-    animation: steamFlow 6s ease-in-out infinite;
     pointer-events: none;
-}
-
-@keyframes steamFlow {
-    0% { 
-        left: -100%; 
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% { 
-        left: 100%; 
-        opacity: 0;
-    }
 }
 
 /* Reduce steam effect on smaller elements */
@@ -705,32 +601,14 @@ body::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, 
         transparent 0%, 
-        rgba(218, 165, 32, 0.1) 40%,
-        rgba(74, 124, 122, 0.1) 50%,
-        rgba(139, 68, 68, 0.1) 60%,
+        rgba(218, 165, 32, 0.05) 40%,
+        rgba(74, 124, 122, 0.05) 50%,
+        rgba(139, 68, 68, 0.05) 60%,
         transparent 100%);
-    animation: steamFlow 8s ease-in-out infinite;
-    animation-delay: 2s;
     pointer-events: none;
-}
-
-/* Imperial Decorations */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(218, 165, 32, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(70, 130, 180, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: -1;
 }

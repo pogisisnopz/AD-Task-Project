@@ -97,7 +97,7 @@ ob_start();
           <span>Total:</span>
           <span id="total">₱0.00</span>
         </div>
-        <a href="../../pages/checkout/" class="btn btn-checkout" id="checkout-btn">Proceed to Checkout</a>
+        <a href="../../pages/checkout/index.php" class="btn btn-checkout" id="checkout-btn">Proceed to Checkout</a>
       </div>
       </div>
     </section>

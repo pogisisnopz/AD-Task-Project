@@ -390,7 +390,7 @@ ob_start();
         MechaCart.clearCart();
         
         // Redirect to order confirmation
-        window.location.href = '../../pages/order-confirmation/';
+        window.location.href = '../../pages/order-confirmation/index.php';
       });
     });
   </script>
