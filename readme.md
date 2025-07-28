@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <!-- TODO: If you want to add logo or banner you can add it here -->
-    <img src="./assets/img/dragonite.png" alt="Dragonite" width="130" height="100">
+    <img src="./assets/img/Dragonite.png" alt="Dragonite" width="130" height="100">
   </a>
 <!-- TODO: Change Title to the name of the title of your Project -->
   <h3 align="center">Title</h3>
