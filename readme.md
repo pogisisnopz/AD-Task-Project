@@ -5,22 +5,22 @@
 <br />
 <div align="center">
   <a href="https://github.com/201812905/AD-Task-Project">
-  <!-- TODO: If you want to add logo or banner you can add it here -->
-    <img src="dragonite.png" alt="Healthcare Econ - Steampunk" width="130" height="100">
+    <!-- Logo/Banner Image -->
+    <img src="assets/img/dragonite.png" alt="Healthcare Econ - Steampunk" width="130" height="100">
   </a>
-<!-- TODO: Change Title to the name of the title of your Project -->
+  <!-- Project Title -->
   <h3 align="center">Title</h3>
 </div>
-<!-- TODO: Make a short description -->
+
+<!-- Short Description (Optional) -->
 <div align="center">
   Short Description. (Optional)
 </div>
 
 <br />
 
-<!-- TODO: Change the zyx-0314 into your github username  -->
-<!-- TODO: Change the WD-Template-Project into the same name of your folder -->
-
+<!-- GitHub and Project Info -->
+<!-- Replace with your GitHub username and project folder name -->
 ![](https://visit-counter.vercel.app/counter.png?page=zyx-0314/AD-CI4-Template-Project)
 
 [![wakatime](https://wakatime.com/badge/user/018dd99a-4985-4f98-8216-6ca6fe2ce0f8/project/63501637-9a31-42f0-960d-4d0ab47977f8.svg)](https://wakatime.com/badge/user/018dd99a-4985-4f98-8216-6ca6fe2ce0f8/project/63501637-9a31-42f0-960d-4d0ab47977f8)
@@ -30,7 +30,7 @@
 <br />
 <br />
 
-<!-- TODO: If you want to add more layers for your readme -->
+<!-- Table of Contents -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -58,22 +58,18 @@
 
 ## Overview
 
-<!-- TODO: To be changed -->
-<!-- The following are just sample -->
-
-Description of the project in details.
+<!-- Project Description -->
+Description of the project in detail.
 
 ### Key Components
 
-<!-- TODO: List of Key Components -->
-<!-- The following are just sample -->
-
+<!-- List of Key Components -->
 - Authentication & Authorization
-- CRUD Operations for Invetory System
+- CRUD Operations for Inventory System
 
 ### Technology
 
-<!-- TODO: List of Technology Used -->
+<!-- Technologies Used -->
 #### Language
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -95,8 +91,7 @@ Description of the project in details.
 
 ## Rules, Practices and Principles
 
-<!-- Do not Change this -->
-
+<!-- Guidelines to follow -->
 1. Always use `AD-` in the front of the Title of the Project for the Subject followed by your custom naming.
 2. Do not rename `.php` files if they are pages; always use `index.php` as the filename.
 3. Add `.component` to the `.php` files if they are components code; example: `footer.component.php`.
@@ -105,11 +100,12 @@ Description of the project in details.
 6. Different file naming Cases
    | Naming Case | Type of code         | Example                           |
    | ----------- | -------------------- | --------------------------------- |
-   | Pascal      | Utility              | Accoun.util.php                   |
+   | Pascal      | Utility              | Account.util.php                   |
    | Camel       | Components and Pages | index.php or footer.component.php |
 8. Renaming of Pages folder names are a must, and relates to what it is doing or data it holding.
 9. Use proper label in your github commits: `feat`, `fix`, `refactor` and `docs`
 10. File Structure to follow below.
+
 
 ```
 AD-ProjectName
