@@ -4,9 +4,14 @@
 
 <br />
 <div align="center">
+<<<<<<< HEAD
   <a href="https://github.com/201812905/AD-Task-Project">
     <!-- Logo/Banner Image -->
     <img src="assets/img/dragonite.png" alt="Healthcare Econ - Steampunk" width="130" height="100">
+=======
+  <!-- TODO: If you want to add logo or banner you can add it here -->
+    <img src="./assets/img/Dragonite.png" alt="Dragonite" width="130" height="100">
+>>>>>>> 970accd38aeb4431556e54234c54c46346cdcb58
   </a>
   <!-- Project Title -->
   <h3 align="center">Title</h3>
